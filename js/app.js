@@ -1104,7 +1104,7 @@ async function loadPapersByDateRange(startDate, endDate) {
     const allPaperData = {};
     
     for (const date of validDatesInRange) {
-      const response = await fetch(`data/${date}_AI_enhanced_Chinese.jsonl`);
+      const response = await fetch(`data/${date}_AI_enhanced_English.jsonl`);
       const text = await response.text();
       const dataPapers = parseJsonlData(text, date);
       
