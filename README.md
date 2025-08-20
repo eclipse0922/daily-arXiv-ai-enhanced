@@ -51,7 +51,7 @@ This innovative tool transforms how you stay updated with arXiv papers by combin
 # How to use
 This repo will daily crawl arXiv papers about **cs.CV, cs.GR, cs.CL and cs.AI**, and use **DeepSeek** to summarize the papers in **Chinese**.
 If you wish to crawl other arXiv categories, use other LLMs, or other languages, please follow the instructions.
-Otherwise, you can directly use this repo in https://dw-dengwei.github.io/daily-arXiv-ai-enhanced/. Please star it if you like :)
+Otherwise, you can directly use this repo in https://eclipse0922.github.io/daily-arXiv-ai-enhanced/. Please star it if you like :)
 
 **Instructions:**
 1. Fork this repo to your own account
