@@ -531,7 +531,7 @@ async function loadPapersByDate(date) {
   `;
   
   try {
-    const response = await fetch(`data/${date}_AI_enhanced_Chinese.jsonl`);
+    const response = await fetch(`data/${date}_AI_enhanced_English.jsonl`);
     const text = await response.text();
     
     paperData = parseJsonlData(text, date);
