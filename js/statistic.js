@@ -203,6 +203,7 @@ function initDatePicker() {
     showMonths: 2,
     dateFormat: "Y-m-d",
     defaultDate: availableDates[0],
+    monthSelectorType: "dropdown",
     onDayCreate: function(dObj, dStr, fp, dayElem) {
       // 视觉上淡化没有数据的日期（但保持可选择）
       const dateStr = dayElem.dateObj.getFullYear() + "-" +
@@ -246,10 +247,36 @@ function formatDateForAPI(date) {
 
 function toggleRangeMode() {
   isRangeMode = document.getElementById('dateRangeMode').checked;
-  
+
   if (flatpickrInstance) {
     flatpickrInstance.set('mode', isRangeMode ? 'range' : 'single');
   }
+
+  // Show/hide preset buttons based on range mode
+  const presets = document.getElementById('datePresets');
+  if (presets) {
+    presets.style.display = isRangeMode ? 'flex' : 'none';
+  }
+}
+
+function selectPresetRange(days) {
+  if (!isRangeMode || !flatpickrInstance) return;
+
+  // Get the most recent date from available dates
+  const latestDate = new Date(availableDates[0]);
+
+  // Calculate the start date (days ago from latest)
+  const startDate = new Date(latestDate);
+  startDate.setDate(startDate.getDate() - days);
+
+  // Set the date range in flatpickr
+  flatpickrInstance.setDate([startDate, latestDate], false);
+
+  // Trigger the change manually
+  const startDateStr = formatDateForAPI(startDate);
+  const endDateStr = formatDateForAPI(latestDate);
+  loadPapersByDateRange(startDateStr, endDateStr);
+  toggleDatePicker();
 }
 
 async function loadPapersByDateRange(startDate, endDate) {
@@ -263,7 +290,9 @@ async function loadPapersByDateRange(startDate, endDate) {
     return;
   }
   
-  if (startDate === endDate) {  
+  console.log('Date range selected:', { startDate, endDate, areEqual: startDate === endDate });
+
+  if (startDate === endDate) {
     currentDate = startDate;
     document.getElementById('currentDate').textContent = formatDate(startDate);
   } else {
@@ -464,7 +493,15 @@ async function loadPapersByDateRange(startDate, endDate) {
     `;
 
     // 只在日期范围模式下创建趋势图
+    console.log('Checking trend chart condition:', {
+      startDate,
+      endDate,
+      shouldShowTrend: startDate !== endDate,
+      trendDataLength: trendData.length
+    });
+
     if (startDate !== endDate) {
+      console.log('Creating trend chart with data:', trendData);
       // 创建折线图
       const margin = {top: 20, right: 180, bottom: 80, left: 60}; // 增加底部边距以适应更长的日期标签
       const width = document.getElementById('trendChart').offsetWidth - margin.left - margin.right;
