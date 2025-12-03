@@ -200,17 +200,19 @@ function initDatePicker() {
   // 配置 Flatpickr
   flatpickrInstance = flatpickr(datepickerInput, {
     inline: true,
+    showMonths: 2,
     dateFormat: "Y-m-d",
     defaultDate: availableDates[0],
-    enable: [
-      function(date) {
-        // 只启用有效日期
-        const dateStr = date.getFullYear() + "-" + 
-                        String(date.getMonth() + 1).padStart(2, '0') + "-" + 
-                        String(date.getDate()).padStart(2, '0');
-        return !!enabledDatesMap[dateStr];
+    onDayCreate: function(dObj, dStr, fp, dayElem) {
+      // 视觉上淡化没有数据的日期（但保持可选择）
+      const dateStr = dayElem.dateObj.getFullYear() + "-" +
+                      String(dayElem.dateObj.getMonth() + 1).padStart(2, '0') + "-" +
+                      String(dayElem.dateObj.getDate()).padStart(2, '0');
+      if (!enabledDatesMap[dateStr]) {
+        dayElem.style.opacity = "0.4";
+        dayElem.style.fontWeight = "300";
       }
-    ],
+    },
     onChange: function(selectedDates, dateStr) {
       if (isRangeMode && selectedDates.length === 2) {
         // 处理日期范围选择
