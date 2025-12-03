@@ -129,15 +129,21 @@
                 <div class="date-picker-content">
                     <div class="date-picker-body">
                         <h3 class="date-picker-title">Select Date</h3>
-                        <div class="flatpickr-container">
-                            <input type="text" id="datepicker" placeholder="Select Date" data-input>
-                        </div>
                         <div class="date-range-selector">
                             <span class="toggle-label">Range</span>
                             <label class="toggle-switch">
                                 <input type="checkbox" id="dateRangeMode">
                                 <span class="toggle-slider"></span>
                             </label>
+                        </div>
+                        <div class="date-presets" id="datePresets" style="display: none;">
+                            <button class="preset-btn" onclick="selectPresetRange(7)">Last Week</button>
+                            <button class="preset-btn" onclick="selectPresetRange(14)">Last 2 Weeks</button>
+                            <button class="preset-btn" onclick="selectPresetRange(30)">Last Month</button>
+                            <button class="preset-btn" onclick="selectPresetRange(60)">Last 2 Months</button>
+                        </div>
+                        <div class="flatpickr-container">
+                            <input type="text" id="datepicker" placeholder="Select Date" data-input>
                         </div>
                     </div>
                 </div>
