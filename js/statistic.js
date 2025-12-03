@@ -203,7 +203,6 @@ function initDatePicker() {
     showMonths: 2,
     dateFormat: "Y-m-d",
     defaultDate: availableDates[0],
-    monthSelectorType: "dropdown",
     onDayCreate: function(dObj, dStr, fp, dayElem) {
       // 视觉上淡化没有数据的日期（但保持可选择）
       const dateStr = dayElem.dateObj.getFullYear() + "-" +
