@@ -40,7 +40,7 @@ else
     PARTIAL_MODE=false
     
     # 设置默认值 / Set default values
-    export LANGUAGE="${LANGUAGE:-Chinese}"
+    export LANGUAGE="${LANGUAGE:-English}"
     export CATEGORIES="${CATEGORIES:-cs.CV, cs.CL}"
     export MODEL_NAME="${MODEL_NAME:-gpt-4o-mini}"
     export OPENAI_BASE_URL="${OPENAI_BASE_URL:-https://api.openai.com/v1}"
